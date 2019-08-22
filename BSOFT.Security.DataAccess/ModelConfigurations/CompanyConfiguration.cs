@@ -19,7 +19,7 @@ namespace BSOFT.Security.DataAccess.ModelConfigurations
             builder.Property(prop => prop.BusinessName)
                .HasMaxLength(500)
                .IsRequired();
-            builder.Property(prop => prop.IsActive)               
+            builder.Property(prop => prop.IsActive)
                .IsRequired();
         }
     }
