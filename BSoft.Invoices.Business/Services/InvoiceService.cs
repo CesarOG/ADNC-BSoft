@@ -7,7 +7,7 @@ using BSoft.Invoices.Models;
 
 namespace BSoft.Invoices.Business.Services
 {
-    class InvoiceService : IInvoiceService
+    public class InvoiceService : IInvoiceService
     {
         private DbInvoiceContext _context;
         public InvoiceService(DbInvoiceContext context)
@@ -18,7 +18,7 @@ namespace BSoft.Invoices.Business.Services
         {
             try
             {
-                var data = _context.tbl_invoice.Where(x => x.IdInvoice == id).FirstOrDefault();
+                var data = _context.tbl_invoice.Where(x => x.idinvoice == id).FirstOrDefault();
 
                 _context.Remove(data);
                 _context.SaveChanges();
@@ -38,7 +38,7 @@ namespace BSoft.Invoices.Business.Services
 
         public tbl_invoice ListInvoiceceById(int id)
         {
-            return _context.tbl_invoice.Where(x => x.IdInvoice == id).FirstOrDefault();
+            return _context.tbl_invoice.Where(x => x.idinvoice == id).FirstOrDefault();
         }
 
         public bool RegisterInvoice(tbl_invoice entity)
@@ -60,8 +60,8 @@ namespace BSoft.Invoices.Business.Services
         {
             try
             {
-                var data = _context.tbl_invoice.Where(x => x.IdInvoice == entity.IdInvoice).FirstOrDefault();
-                data.IsPay = true;
+                var data = _context.tbl_invoice.Where(x => x.idinvoice == entity.idinvoice).FirstOrDefault();
+                data.ispay = true;
                 _context.SaveChanges();
                 return true;
             }

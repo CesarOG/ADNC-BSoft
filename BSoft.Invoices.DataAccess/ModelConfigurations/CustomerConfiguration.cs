@@ -11,17 +11,17 @@ namespace BSoft.Invoices.DataAccess.ModelConfigurations
     {
         public void Configure(EntityTypeBuilder<tbl_customer> builder)
         {
-            builder.HasKey(prop => prop.IdCustomer);
-            builder.Property(prop => prop.Businessname)
+            builder.HasKey(prop => prop.idcustomer);
+            builder.Property(prop => prop.businessname)
                 .HasMaxLength(100)
                 .IsRequired();
-            builder.Property(prop => prop.Ruc)
+            builder.Property(prop => prop.ruc)
                 .HasMaxLength(50)
                 .IsRequired();
-            builder.Property(prop => prop.ContactName)
+            builder.Property(prop => prop.contactname)
                 .HasMaxLength(500)
                 .IsRequired();
-            builder.Property(prop => prop.IsActive)
+            builder.Property(prop => prop.isactive)
                 .IsRequired();
         }
     }

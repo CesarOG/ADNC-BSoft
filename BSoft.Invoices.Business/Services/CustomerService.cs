@@ -7,7 +7,7 @@ using BSoft.Invoices.Models;
 
 namespace BSoft.Invoices.Business.Services
 {
-    class CustomerService : ICustomerService
+    public class CustomerService : ICustomerService
     {
         private DbInvoiceContext _context;
         public CustomerService(DbInvoiceContext context)
@@ -19,8 +19,8 @@ namespace BSoft.Invoices.Business.Services
             try
             {
 
-                var data = _context.tbl_customer.Where(x => x.IdCustomer == id).FirstOrDefault();
-                data.IsActive = false;
+                var data = _context.tbl_customer.Where(x => x.idcustomer == id).FirstOrDefault();
+                data.isactive = false;
                 _context.SaveChanges();
                 return true;
             }
@@ -38,7 +38,7 @@ namespace BSoft.Invoices.Business.Services
 
         public tbl_customer ListCustomerById(int id)
         {
-            return _context.tbl_customer.Where(x => x.IdCustomer == id).FirstOrDefault();
+            return _context.tbl_customer.Where(x => x.idcustomer == id).FirstOrDefault();
         }
 
         public bool RegisterCustomer(tbl_customer entity)
@@ -60,8 +60,10 @@ namespace BSoft.Invoices.Business.Services
         {
             try
             {
-                var data = _context.tbl_customer.Where(x => x.IdCustomer == entity.IdCustomer).FirstOrDefault();
-                data = entity;
+                var data = _context.tbl_customer.Where(x => x.idcustomer == entity.idcustomer).FirstOrDefault();
+                data.businessname = entity.businessname;
+                data.ruc = entity.ruc;             
+                data.contactname = entity.contactname;
                 _context.SaveChanges();
                 return true;
             }

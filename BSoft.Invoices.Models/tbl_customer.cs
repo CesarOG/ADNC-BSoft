@@ -6,10 +6,10 @@ namespace BSoft.Invoices.Models
 {
     public class tbl_customer
     {
-        public int IdCustomer { get; set; }
-        public string Businessname { get; set; }
-        public string Ruc { get; set; }
-        public string ContactName { get; set; }
-        public bool IsActive { get; set; }
+        public int idcustomer { get; set; }
+        public string businessname { get; set; }
+        public string ruc { get; set; }
+        public string contactname { get; set; }
+        public bool isactive { get; set; }
     }
 }

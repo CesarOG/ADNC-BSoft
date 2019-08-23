@@ -11,16 +11,16 @@ namespace BSoft.Invoices.DataAccess.ModelConfigurations
     {
         public void Configure(EntityTypeBuilder<tbl_invoice> builder)
         {
-            builder.HasKey(prop => prop.IdInvoice);
-            builder.Property(prop => prop.AmountTotal)
+            builder.HasKey(prop => prop.idinvoice);
+            builder.Property(prop => prop.amounttotal)
                 .IsRequired();
-            builder.Property(prop => prop.ResidueTotal)
+            builder.Property(prop => prop.residuetotal)
                 .IsRequired();
-            builder.Property(prop => prop.IdCustomer)
+            builder.Property(prop => prop.idcustomer)
                 .IsRequired();
-            builder.Property(prop => prop.IdService)
+            builder.Property(prop => prop.idservice)
                 .IsRequired();
-            builder.Property(prop => prop.IsPay)
+            builder.Property(prop => prop.ispay)
                 .IsRequired();
 
         }

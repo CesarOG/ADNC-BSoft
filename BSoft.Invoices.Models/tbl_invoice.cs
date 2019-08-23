@@ -6,11 +6,11 @@ namespace BSoft.Invoices.Models
 {
     public class tbl_invoice
     {
-        public int IdInvoice { get; set; }
-        public decimal AmountTotal { get; set; }
-        public decimal ResidueTotal { get; set; }
-        public int IdCustomer { get; set; }
-        public int IdService { get; set; }
-        public bool IsPay { get; set; }
+        public int idinvoice { get; set; }
+        public decimal amounttotal { get; set; }
+        public decimal residuetotal { get; set; }
+        public int idcustomer { get; set; }
+        public int idservice { get; set; }
+        public bool ispay { get; set; }
     }
 }

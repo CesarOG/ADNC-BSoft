@@ -11,18 +11,18 @@ namespace BSoft.Invoices.DataAccess.ModelConfigurations
     {
         public void Configure(EntityTypeBuilder<tbl_service> builder)
         {
-            builder.HasKey(prop => prop.IdService);
-            builder.Property(prop => prop.Code)
+            builder.HasKey(prop => prop.idservice);
+            builder.Property(prop => prop.code)
                 .HasMaxLength(50)
                 .IsRequired();
-            builder.Property(prop => prop.InternalCode)
+            builder.Property(prop => prop.internalcode)
                 .HasMaxLength(50)
                 .IsRequired();
-            builder.Property(prop => prop.Description)
+            builder.Property(prop => prop.description)
                 .HasMaxLength(500);
-            builder.Property(prop => prop.Price)
+            builder.Property(prop => prop.price)
                 .IsRequired();
-            builder.Property(prop => prop.IsActive)
+            builder.Property(prop => prop.isactive)
                 .IsRequired();
         }
     }
