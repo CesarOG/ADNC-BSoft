@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BSoft.Invoices.Business;
 using BSoft.Invoices.Business.Services;
 using BSoft.Invoices.DataAccess;
 using BSOFT.Invoices.API;
@@ -37,6 +38,8 @@ namespace BSoft.Invoices.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddSingleton<IUnitOfWork>(option => new UnitOfWork(Configuration.GetConnectionString("DefaultConnection")));
             //TOKEN
             var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration["Auth:Jwt:Key"]));
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -103,9 +106,9 @@ namespace BSoft.Invoices.API
                 )
                 );
             // Inyectando los servicios a usar
-            services.AddScoped<ICustomerService, CustomerService>();
-            services.AddScoped<IServiceService, ServiceService>();
-            services.AddScoped<IInvoiceService, InvoiceService>();
+            //services.AddScoped<ICustomerService, CustomerService>();
+            //services.AddScoped<IServiceService, ServiceService>();
+            //services.AddScoped<IInvoiceService, InvoiceService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

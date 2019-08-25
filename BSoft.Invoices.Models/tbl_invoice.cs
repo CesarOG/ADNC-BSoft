@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dapper.Contrib.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,6 +7,7 @@ namespace BSoft.Invoices.Models
 {
     public class tbl_invoice
     {
+        [Key]
         public int idinvoice { get; set; }
         public decimal amounttotal { get; set; }
         public decimal residuetotal { get; set; }

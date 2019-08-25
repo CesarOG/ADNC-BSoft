@@ -3,73 +3,57 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using BSoft.Invoices.DataAccess;
+using BSoft.Invoices.DataAccess.Repositories;
 using BSoft.Invoices.Models;
+using BSoft.Invoices.Models.Beans;
 
 namespace BSoft.Invoices.Business.Services
 {
     public class InvoiceService : IInvoiceService
     {
-        private DbInvoiceContext _context;
-        public InvoiceService(DbInvoiceContext context)
+        public IInvoiceRepository invoiceRepository { get; private set; }
+        public InvoiceService(string cnString)
         {
-            _context = context;
+            invoiceRepository = new InvoiceRepository(cnString);
         }
-        public bool DeleteInvoice(int id)
+        public bool DeleteInvoice(tbl_invoice entity)
         {
-            try
-            {
-                var data = _context.tbl_invoice.Where(x => x.idinvoice == id).FirstOrDefault();
-
-                _context.Remove(data);
-                _context.SaveChanges();
-                return true;
-            }
-            catch
-            {
-
-                return false;
-            }
+            return invoiceRepository.Delete(entity);
         }
 
-        public List<tbl_invoice> ListInvoice()
+        public IEnumerable<tbl_invoice> ListInvoice()
         {
-            return _context.tbl_invoice.ToList();
+            return invoiceRepository.GetList();
         }
 
         public tbl_invoice ListInvoiceceById(int id)
         {
-            return _context.tbl_invoice.Where(x => x.idinvoice == id).FirstOrDefault();
+            return invoiceRepository.GetById(id);
         }
 
-        public bool RegisterInvoice(tbl_invoice entity)
+        public IEnumerable<InvoiceBean> ListInvoicesByCustomer(int customerId)
         {
-            try
-            {
-                _context.tbl_invoice.Add(entity);
-                _context.SaveChanges();
-                return true;
-            }
-            catch
-            {
+            return invoiceRepository.ListInvoicesByCustomer(customerId);
+        }
 
-                return false;
-            }
+        public IEnumerable<string> PayInvoice(int invoiceId, int serviceId, int customerId)
+        {
+            return invoiceRepository.PayInvoice(invoiceId, serviceId, customerId);
+        }
+
+        public int RegisterInvoice(tbl_invoice entity)
+        {
+            return invoiceRepository.Insert(entity);
+        }
+
+        public IEnumerable<string> ReverseInvoice(int invoiceId, int serviceId, int customerId)
+        {
+            return invoiceRepository.ReverseInvoice(invoiceId, serviceId, customerId);
         }
 
         public bool UpdateInvoice(tbl_invoice entity)
         {
-            try
-            {
-                var data = _context.tbl_invoice.Where(x => x.idinvoice == entity.idinvoice).FirstOrDefault();
-                data.ispay = true;
-                _context.SaveChanges();
-                return true;
-            }
-            catch
-            {
-
-                return false;
-            }
+            return invoiceRepository.Update(entity);
         }
     }
 }

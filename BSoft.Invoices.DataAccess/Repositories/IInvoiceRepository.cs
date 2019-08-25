@@ -4,23 +4,18 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BSoft.Invoices.Business.Services
+namespace BSoft.Invoices.DataAccess.Repositories
 {
-    public interface IInvoiceService
+    public interface IInvoiceRepository:IRepository<tbl_invoice>
     {
-        IEnumerable<tbl_invoice> ListInvoice();
-        tbl_invoice ListInvoiceceById(int id);
-        bool UpdateInvoice(tbl_invoice entity);
-        bool DeleteInvoice(tbl_invoice entity);
-        int RegisterInvoice(tbl_invoice entity);
 
+        //Implemtar los metodos no genericos
         /*Listar*/
         IEnumerable<InvoiceBean> ListInvoicesByCustomer(int customerId);
         /*Pagar*/
         IEnumerable<string> PayInvoice(int invoiceId, int serviceId, int customerId);
         /*Extornar*/
         IEnumerable<string> ReverseInvoice(int invoiceId, int serviceId, int customerId);
-
 
     }
 }
