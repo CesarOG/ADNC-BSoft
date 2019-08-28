@@ -43,7 +43,7 @@ namespace BSOFT.Security.API.Controllers
                 };
 
                 Response.Headers.Add("access-control-expose-headers", "Authorization");
-                Response.Headers.Add("Autorization", "Bearer " + CreateToken());
+                Response.Headers.Add("Authorization", "Bearer " + CreateToken());
 
                 return Ok(token);
             }

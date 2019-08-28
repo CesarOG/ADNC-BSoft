@@ -46,9 +46,9 @@ namespace BSoft.Invoices.Business.Services
             return invoiceRepository.Insert(entity);
         }
 
-        public IEnumerable<string> ReverseInvoice(int invoiceId, int serviceId, int customerId)
+        public IEnumerable<string> ReversePay(int invoiceId, int serviceId, int customerId)
         {
-            return invoiceRepository.ReverseInvoice(invoiceId, serviceId, customerId);
+            return invoiceRepository.ReversePay(invoiceId, serviceId, customerId);
         }
 
         public bool UpdateInvoice(tbl_invoice entity)

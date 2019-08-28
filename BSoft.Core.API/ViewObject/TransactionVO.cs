@@ -7,5 +7,9 @@ namespace BSoft.Invoices.API.ViewObject
 {
     public class TransactionVO
     {
+        public TransactionVO() { }
+
+        public string Code { get; set; }
+        public string Description { get; set; }
     }
 }

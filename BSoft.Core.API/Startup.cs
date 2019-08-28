@@ -4,9 +4,14 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BSoft.Core.API.GlobalErrorHandling;
+using BSoft.Invoices.API.Configuration;
 using BSoft.Invoices.Business;
 using BSoft.Invoices.Business.Services;
 using BSoft.Invoices.DataAccess;
+using BSOFT.Core.Proxy;
+using BSOFT.Core.Proxy.Infraestructure;
+using BSOFT.Core.Proxy.Service;
 using BSOFT.Invoices.API;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -83,6 +88,7 @@ namespace BSoft.Invoices.API
             {
                 options.Filters.Add(new CorsAuthorizationFilterFactory("MyPolicy"));
             });
+            Register.IoCRegister.AddRegistration(services);
             // VERSION DE NET CORE
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             // Swagger
@@ -100,19 +106,24 @@ namespace BSoft.Invoices.API
                                     );
             });
             // Base de Datos
-            services.AddDbContext<DbInvoiceContext>(
-                options => options.UseNpgsql(
-                    Configuration.GetConnectionString("DefaultConnection")
-                )
-                );
+            //services.AddDbContext<DbInvoiceContext>(
+            //    options => options.UseNpgsql(
+            //        Configuration.GetConnectionString("DefaultConnection")
+            //    )
+            //    );
             // Inyectando los servicios a usar
             //services.AddScoped<ICustomerService, CustomerService>();
             //services.AddScoped<IServiceService, ServiceService>();
             //services.AddScoped<IInvoiceService, InvoiceService>();
+
+            services.Configure<AppSettings>(Configuration);
+            services.AddSingleton<IHttpClient, CustomHttpClient>();
+            services.AddTransient<ILogService, LogService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IAppConfig appConfig, ILogService logSvc)
         {
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
@@ -135,7 +146,7 @@ namespace BSoft.Invoices.API
             }
 
             app.UseHttpsRedirection();
-            app.UseMvc();
+            //app.UseMvc();
 
             //app.UseHttpsRedirection();
 
@@ -153,6 +164,10 @@ namespace BSoft.Invoices.API
                     Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot/vendor")),
                 RequestPath = new PathString("/vendor")
             });
+
+            app.ConfigureExceptionHandler(appConfig, logSvc);
+
+            app.UseAuthentication();
 
             //app.UseMvc();
             app.UseMvc(routes =>

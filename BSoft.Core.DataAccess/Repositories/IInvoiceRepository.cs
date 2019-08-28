@@ -15,7 +15,7 @@ namespace BSoft.Invoices.DataAccess.Repositories
         /*Pagar*/
         IEnumerable<string> PayInvoice(int invoiceId, int serviceId, int customerId);
         /*Extornar*/
-        IEnumerable<string> ReverseInvoice(int invoiceId, int serviceId, int customerId);
+        IEnumerable<string> ReversePay(int invoiceId, int serviceId, int customerId);
 
     }
 }

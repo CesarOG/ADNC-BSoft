@@ -25,13 +25,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01.- API", "01.- API", "{56
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02.- Data", "02.- Data", "{25FBD29B-2568-40BB-AD6F-F1239AA0C7E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSoft.Invoices.Models", "BSoft.Invoices.Models\BSoft.Invoices.Models.csproj", "{DCBC1BB9-6377-4614-8698-5F8D17FAA8E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BSoft.Core.Models", "BSoft.Core.Models\BSoft.Core.Models.csproj", "{DCBC1BB9-6377-4614-8698-5F8D17FAA8E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSoft.Invoices.DataAccess", "BSoft.Invoices.DataAccess\BSoft.Invoices.DataAccess.csproj", "{02113E53-937D-4932-8258-13B109A000E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BSoft.Core.DataAccess", "BSoft.Core.DataAccess\BSoft.Core.DataAccess.csproj", "{02113E53-937D-4932-8258-13B109A000E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSoft.Invoices.Business", "BSoft.Invoices.Business\BSoft.Invoices.Business.csproj", "{A32B4726-BC4F-4554-BCC2-AACA0F1372D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BSoft.Core.Business", "BSoft.Core.Business\BSoft.Core.Business.csproj", "{A32B4726-BC4F-4554-BCC2-AACA0F1372D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSoft.Invoices.API", "BSoft.Invoices.API\BSoft.Invoices.API.csproj", "{854C6B0F-3629-46BA-AC7E-E99C14652764}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BSoft.Core.API", "BSoft.Core.API\BSoft.Core.API.csproj", "{854C6B0F-3629-46BA-AC7E-E99C14652764}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03.- Proxy", "03.- Proxy", "{A3EEB412-3AF4-490B-A1F0-2322FAFA496A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSOFT.Core.Proxy", "BSOFT.Core.Proxy\BSOFT.Core.Proxy.csproj", "{0A92336B-27F7-4799-BC04-D211B69F4AAC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +75,10 @@ Global
 		{854C6B0F-3629-46BA-AC7E-E99C14652764}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{854C6B0F-3629-46BA-AC7E-E99C14652764}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{854C6B0F-3629-46BA-AC7E-E99C14652764}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A92336B-27F7-4799-BC04-D211B69F4AAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A92336B-27F7-4799-BC04-D211B69F4AAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A92336B-27F7-4799-BC04-D211B69F4AAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A92336B-27F7-4799-BC04-D211B69F4AAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,6 +96,8 @@ Global
 		{02113E53-937D-4932-8258-13B109A000E6} = {25FBD29B-2568-40BB-AD6F-F1239AA0C7E2}
 		{A32B4726-BC4F-4554-BCC2-AACA0F1372D5} = {25FBD29B-2568-40BB-AD6F-F1239AA0C7E2}
 		{854C6B0F-3629-46BA-AC7E-E99C14652764} = {5690D937-9D64-480C-BB59-CB64DF94CEAA}
+		{A3EEB412-3AF4-490B-A1F0-2322FAFA496A} = {38C86CAA-CA3E-4F1C-B00F-16E5691A17E0}
+		{0A92336B-27F7-4799-BC04-D211B69F4AAC} = {A3EEB412-3AF4-490B-A1F0-2322FAFA496A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CC27D753-25A1-46C8-893F-E4A291DEB466}

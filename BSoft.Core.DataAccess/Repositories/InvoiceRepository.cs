@@ -54,7 +54,7 @@ namespace BSoft.Invoices.DataAccess.Repositories
             }
         }
 
-        public IEnumerable<string> ReverseInvoice(int invoiceId, int serviceId, int customerId)
+        public IEnumerable<string> ReversePay(int invoiceId, int serviceId, int customerId)
         {
             using (var connection = new NpgsqlConnection(_connectionString))
             {

@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BSoft.Invoices.Models\BSoft.Invoices.Models.csproj" />
+    <ProjectReference Include="..\BSoft.Core.Models\BSoft.Core.Models.csproj" />
   </ItemGroup>
 
   <ItemGroup>

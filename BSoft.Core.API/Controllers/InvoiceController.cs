@@ -6,6 +6,8 @@ using BSoft.Invoices.API.ViewObject;
 using BSoft.Invoices.Business;
 using BSoft.Invoices.Business.Services;
 using BSoft.Invoices.Models;
+using BSoft.Invoices.Models.Beans;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,6 +15,7 @@ namespace BSoft.Invoices.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize]
     public class InvoiceController : BaseController
     {
         //private readonly IInvoiceService _invoiceService;
@@ -26,6 +29,7 @@ namespace BSoft.Invoices.API.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult<IEnumerable<InvoiceVO>> Get()
         {
             //return Ok(_invoiceService.ListInvoice());
@@ -53,7 +57,7 @@ namespace BSoft.Invoices.API.Controllers
             }
 
 
-            return Ok();
+            return Ok(response);
         }
         [HttpGet("{id}")]
         public ActionResult<IEnumerable<tbl_service>> Get(int id)
@@ -101,7 +105,75 @@ namespace BSoft.Invoices.API.Controllers
 
             return Ok();
         }
+        [HttpPost]
+        [Route("PayDebt/")]
+        public IActionResult PayDebt([FromBody]  InvoiceVO entity)
+        {
+            var response = _unitOfWork.Invoice.PayInvoice(entity.codigo, entity.producto.codigo, entity.cliente.codigo).FirstOrDefault();
+            TransactionVO transaction = new TransactionVO();
+            if (response == "0000")
+            {
+                transaction.Code = response;
+                transaction.Description = "Operacion Exitosa";
+            }
+            else
+            {
+                transaction.Code = "1111";
+                transaction.Description = "Error en la operacion";
+            }
+            return Ok(new { result = transaction.Code, message = transaction.Description });
+        }
 
+        [HttpPost]
+        [Route("ReversePayment/")]
+        public IActionResult ReversePayment([FromBody]  InvoiceVO entity)
+        {
+            string response = _unitOfWork.Invoice.ReversePay(entity.codigo, entity.producto.codigo, entity.cliente.codigo).FirstOrDefault();
+            TransactionVO transaction = new TransactionVO();
+            if (response == "0000")
+            {
+                transaction.Code = response;
+                transaction.Description = "Operacion Exitosa";
+            }
+            else
+            {
+                transaction.Code = "1111";
+                transaction.Description = "Error en la operacion";
+            }
+            return Ok(new { result = transaction.Code, message = transaction.Description });
+        }
+
+        [HttpGet]
+        [Route("ListDebts/{customerId}")]
+        public IActionResult ListDebts(int customerId)
+        {
+            List<InvoiceVO> listResponse = new List<InvoiceVO>();
+            var result = _unitOfWork.Invoice.ListInvoicesByCustomer(customerId);
+
+            foreach (InvoiceBean item in result)
+            {
+                InvoiceVO invoiceVO = new InvoiceVO()
+                {
+                    codigo = item.InvoiceId,
+                    monto = item.ResidueTotal,
+                    estado = (item.IsPay ? "1" : "0"),
+                    cliente = new CustomerVO()
+                    {
+                        nombres = item.ContactName,
+                        codigo = item.CustomerId,
+                        empresa = item.BusinessName
+                    },
+                    producto = new ServiceVO()
+                    {
+                        codigo = item.serviceid,
+                        descripcion = item.description,
+                        precio = item.Price.ToString()
+                    }
+                };
+                listResponse.Add(invoiceVO);
+            }
+            return Ok(listResponse);
+        }
 
 
     }
